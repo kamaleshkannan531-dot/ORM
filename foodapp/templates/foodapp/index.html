@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Platform - ORM Web Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 2px solid #f1f2f6;
+            margin-bottom: 25px;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #fc8019 0%, #e23744 100%);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+        h1 {
+            color: #1c1c1c;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        p.subtitle {
+            color: #696969;
+            font-size: 14px;
+        }
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid #edf2f7;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        thead {
+            background: linear-gradient(135deg, #fc8019 0%, #e23744 100%);
+            color: #ffffff;
+        }
+        th, td {
+            padding: 14px 18px;
+            font-size: 14px;
+        }
+        th {
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        tbody tr {
+            border-bottom: 1px solid #edf2f7;
+            transition: background-color 0.2s ease;
+        }
+        tbody tr:hover {
+            background-color: #fff9f5;
+        }
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+        .badge-id {
+            background-color: #eef2ff;
+            color: #4f46e5;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            font-size: 12px;
+        }
+        .badge-cuisine {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+        }
+        .rating {
+            background-color: #24963f;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .price {
+            font-weight: 600;
+            color: #1c1c1c;
+        }
+        .footer {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #888;
+        }
+        .total-pill {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 500;
+            color: #334155;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">🍔 Swiggy / Zomato ORM Platform</div>
+            <h1>Ex 02 - ORM Web Application</h1>
+            <p class="subtitle">Online Food Delivery Platform Database Management using Django ORM</p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item ID (PK)</th>
+                        <th>Item Name</th>
+                        <th>Restaurant Name</th>
+                        <th>Cuisine</th>
+                        <th>Price (₹)</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td><span class="badge-id">{{ item.item_id }}</span></td>
+                        <td><strong>{{ item.item_name }}</strong></td>
+                        <td>{{ item.restaurant_name }}</td>
+                        <td><span class="badge-cuisine">{{ item.cuisine }}</span></td>
+                        <td class="price">₹{{ item.price }}</td>
+                        <td><span class="rating">★ {{ item.rating }}</span></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding: 20px; color:#888;">No records found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <span class="total-pill">Total Items: <strong>{{ items|length }}</strong></span>
+            <span>Django ORM Database Table: <code>foodapp_fooditem</code></span>
+        </div>
+    </div>
+</body>
+</html>
